@@ -63,7 +63,7 @@ eventos['color'] = np.where(eventos['evento'] == 'Por encima (+2σ)', 'red', 'gr
 
 # Graficar
 fig, ax = plt.subplots(figsize=(12, 5))
-plt.plot(df['log_ret'], label='Log Return', color='orange')
+plt.plot(df['log_ret'], label='Log Return', color='grey')
 plt.plot(df['upper'], linestyle='--', color='red', label='Upper Threshold')
 plt.plot(df['lower'], linestyle='--', color='green', label='Lower Threshold')
 plt.axhline(0, linestyle='--', color='gray', linewidth=1)
@@ -98,5 +98,10 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
+print("Historial de anomalias detectadas:")
+
 # Tu código se ejecuta aquí
+for idx, evento in eventos.sort_index(ascending=False)[['evento']].itertuples(index=True, name=None):
+    print(f"{idx.strftime('%Y-%m-%d %H:%M')} - {evento}")
+
 input("El programa ha terminado.")
